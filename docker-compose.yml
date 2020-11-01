@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    container_name: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    command: python app.py
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=transportoi
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+
+
+volumes:
+  pgdata:
